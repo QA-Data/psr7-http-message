@@ -24,11 +24,17 @@ trait ExtraRequestTrait
 		return $contents;
 	}
 
+	/**
+	 * @throws \JsonException
+	 */
 	public function getJsonBody(bool $assoc = true): mixed
 	{
-		return json_decode($this->getContents(), associative: $assoc);
+		return json_decode($this->getContents(), associative: $assoc, flags: JSON_THROW_ON_ERROR);
 	}
 
+	/**
+	 * @throws \JsonException
+	 */
 	public function getJsonBodyCopy(bool $assoc = true): mixed
 	{
 		$contents = $this->getJsonBody($assoc);
