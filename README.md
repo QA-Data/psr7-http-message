@@ -21,7 +21,7 @@ The easiest way is to create request using `Psr7RequestFactory`.
 ```php
 use Contributte\Psr7\Psr7RequestFactory;
 
-$psr7 = Psr7RequestFactory::fromGlobal();
+$psr7 = Psr7RequestFactory::fromGlobals();
 ```
 
 Additional methods (against PSR7 interface):
@@ -31,13 +31,11 @@ Additional methods (against PSR7 interface):
 - getContentsCopy(): mixed
 - getJsonBody(bool $associative = true): mixed
 - getJsonBodyCopy(bool $associative = true): mixed
-- withNewUri(string $uri): self - returns clone with given url
 
 ## `Psr7ServerRequest`
 
 Additional methods (against PSR7 interface):
 
-- normalizeNetteFiles(Nette\Http\FileUpload[] $files): Psr7UploadedFile[]
 - of(ServerRequestInterface $request): self
 - fromGlobals(): self
 - withAttributes(array $attributes): self
@@ -66,12 +64,6 @@ Additional methods (against PSR7 interface):
 - getJsonBody(bool $associative = true): mixed
 - getContents(bool $rewind = true): mixed
 - withHeaders(array $headers): self
-- getHttpResponse(): ?Nette\Http\IResponse
-- withHttpResponse(Nette\Http\IResponse $response)
-- hasHttpResponse(): bool
-- getApplicationResponse(): ?Nette\Application\IResponse
-- withApplicationResponse(Nette\Application\IResponse $response)
-- hasApplicationResponse(): bool
 - send(): void
 - sendHeaders(): void
 - sendBody(): void
@@ -98,8 +90,6 @@ Additional methods (against PSR7 interface):
 - `withRequestTarget($requestTarget): static`
 - `getMethod(): string`
 - `withMethod(string $method): static`
-- `getUri(): UriInterface`
-- `withUri(UriInterface $uri, bool $preserveHost = false): static`
 
 **ServerRequestInterface** << **RequestInterface**
 
