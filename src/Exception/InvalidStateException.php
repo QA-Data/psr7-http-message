@@ -2,7 +2,6 @@
 
 namespace QaData\Psr7\Exception;
 
-
 final class InvalidStateException extends LogicalException
 {
 

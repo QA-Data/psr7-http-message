@@ -6,12 +6,9 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UploadedFileInterface;
 use Psr\Http\Message\UriInterface;
-use QaData\Psr7\Extra\ExtraServerRequestTrait;
 
-class ProxyRequest implements ServerRequestInterface
+class Psr7RequestWrapper implements ServerRequestInterface
 {
-
-	use ExtraServerRequestTrait;
 
 	public function __construct(protected ServerRequestInterface $inner)
 	{
@@ -134,6 +131,19 @@ class ProxyRequest implements ServerRequestInterface
 		return $new;
 	}
 
+	public function getUri(): UriInterface
+	{
+		return $this->inner->getUri();
+	}
+
+	public function withUri(UriInterface $uri, bool $preserveHost = false): static
+	{
+		$new = clone $this;
+		$new->inner = $this->inner->withUri($uri, $preserveHost);
+
+		return $new;
+	}
+
 	/**
 	 * @return array<mixed>
 	 */
@@ -208,7 +218,7 @@ class ProxyRequest implements ServerRequestInterface
 	}
 
 	/**
-	 * @param mixed $data
+	 * @param array<mixed>|object|null $data
 	 *
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 */
@@ -245,19 +255,6 @@ class ProxyRequest implements ServerRequestInterface
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withoutAttribute($name);
-
-		return $new;
-	}
-
-	public function getUri(): UriInterface
-	{
-		return $this->inner->getUri();
-	}
-
-	public function withUri(UriInterface $uri, bool $preserveHost = false): static
-	{
-		$new = clone $this;
-		$new->inner = $this->inner->withUri($uri, $preserveHost);
 
 		return $new;
 	}

@@ -2,7 +2,7 @@
 
 namespace QaData\Psr7\Extra;
 
-use QaData\Exception\InvalidStateException;
+use QaData\Psr7\Exception\InvalidStateException;
 use function array_key_exists;
 use function func_num_args;
 use function sprintf;

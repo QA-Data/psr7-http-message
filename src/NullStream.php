@@ -76,7 +76,7 @@ class NullStream implements StreamInterface
 		throw new RuntimeException('Null streams cannot read');
 	}
 
-	public function write(string $data): int
+	public function write(string $string): int
 	{
 		throw new RuntimeException('Null streams cannot write');
 	}

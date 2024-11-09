@@ -2,8 +2,10 @@
 
 namespace QaData\Psr7\Extra;
 
+use JsonException;
 use QaData\Psr7\Psr7Stream;
 use function json_decode;
+use const JSON_THROW_ON_ERROR;
 
 /**
  * @method Psr7Stream getBody()
@@ -25,7 +27,7 @@ trait ExtraRequestTrait
 	}
 
 	/**
-	 * @throws \JsonException
+	 * @throws JsonException
 	 */
 	public function getJsonBody(bool $assoc = true): mixed
 	{
@@ -33,7 +35,7 @@ trait ExtraRequestTrait
 	}
 
 	/**
-	 * @throws \JsonException
+	 * @throws JsonException
 	 */
 	public function getJsonBodyCopy(bool $assoc = true): mixed
 	{

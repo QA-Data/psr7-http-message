@@ -5,9 +5,6 @@ namespace QaData\Psr7;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
-/**
- * Tiny wrapper for PSR-7 ResponseInterface
- */
 class Psr7ResponseWrapper implements ResponseInterface
 {
 
@@ -61,6 +58,8 @@ class Psr7ResponseWrapper implements ResponseInterface
 
 	/**
 	 * @param string|array<string> $value
+	 *
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 */
 	public function withHeader(string $name, $value): static
 	{
@@ -71,6 +70,8 @@ class Psr7ResponseWrapper implements ResponseInterface
 
 	/**
 	 * @param string|array<string> $value
+	 *
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 */
 	public function withAddedHeader(string $name, $value): static
 	{

@@ -4,14 +4,10 @@ namespace QaData\Psr7;
 
 use GuzzleHttp\Psr7\LazyOpenStream;
 use GuzzleHttp\Psr7\ServerRequest;
-use GuzzleHttp\Psr7\UploadedFile;
-use InvalidArgumentException;
 use Psr\Http\Message\ServerRequestInterface;
 use QaData\Psr7\Extra\ExtraServerRequestTrait;
-use function array_merge;
 use function function_exists;
 use function getallheaders;
-use function is_array;
 use function str_replace;
 
 /**
@@ -21,35 +17,6 @@ class Psr7ServerRequest extends ServerRequest
 {
 
 	use ExtraServerRequestTrait;
-
-	/**
-	 * @param array<UploadedFile>|array<array<UploadedFile>>|array<mixed>|array<array<mixed>> $files
-	 * @return array<Psr7UploadedFile>
-	 */
-	public static function normalizeNetteFiles(array $files): array
-	{
-		$normalized = [];
-
-		foreach ($files as $file) {
-			if ($file instanceof UploadedFile) {
-				$normalized[] = new Psr7UploadedFile(
-					$file->getStream(),
-					$file->getSize(),
-					$file->getError(),
-					$file->getClientFilename(),
-					$file->getClientMediaType(),
-				);
-			} elseif (is_array($file)) {
-				$normalized = array_merge($normalized, self::normalizeNetteFiles($file));
-			} elseif ($file === null) {
-				continue;
-			} else {
-				throw new InvalidArgumentException('Invalid value in files specification');
-			}
-		}
-
-		return $normalized;
-	}
 
 	public static function of(ServerRequestInterface $request): ServerRequestInterface
 	{

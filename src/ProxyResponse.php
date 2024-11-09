@@ -6,9 +6,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use QaData\Psr7\Extra\ExtraResponseTrait;
 
-/**
- * Tiny wrapper for PSR-7 ResponseInterface
- */
 class ProxyResponse implements ResponseInterface
 {
 
@@ -64,6 +61,8 @@ class ProxyResponse implements ResponseInterface
 
 	/**
 	 * @param string|array<string> $value
+	 *
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 */
 	public function withHeader(string $name, $value): static
 	{
@@ -75,6 +74,8 @@ class ProxyResponse implements ResponseInterface
 
 	/**
 	 * @param string|array<string> $value
+	 *
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 	 */
 	public function withAddedHeader(string $name, $value): static
 	{

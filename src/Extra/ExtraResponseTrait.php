@@ -3,8 +3,10 @@
 namespace QaData\Psr7\Extra;
 
 use JsonSerializable;
-use Nette\Utils\Json;
 use QaData\Psr7\Psr7Stream;
+use function json_decode;
+use function json_encode;
+use const JSON_THROW_ON_ERROR;
 
 /**
  * @method Psr7Stream getBody()
@@ -39,20 +41,20 @@ trait ExtraResponseTrait
 	public function writeJsonBody(array $data): static
 	{
 		return $this
-			->writeBody(Json::encode($data))
+			->writeBody(json_encode($data))
 			->withHeader('Content-Type', 'application/json');
 	}
 
 	public function writeJsonObject(JsonSerializable $object): static
 	{
 		return $this
-			->writeBody(Json::encode($object))
+			->writeBody(json_encode($object))
 			->withHeader('Content-Type', 'application/json');
 	}
 
 	public function getJsonBody(bool $assoc = true): mixed
 	{
-		return Json::decode($this->getContents(), forceArrays: $assoc);
+		return json_decode($this->getContents(), associative: $assoc, flags: JSON_THROW_ON_ERROR);
 	}
 
 	public function getContents(bool $rewind = true): string
@@ -64,16 +66,13 @@ trait ExtraResponseTrait
 		return $this->getBody()->getContents();
 	}
 
-	/*
-	 * HEADERS ****************************************************************
-	 */
-
 	/**
-	 * @param array<string, string> $headers
+	 * @param array<string, string>|array<string> $headers
 	 */
 	public function withHeaders(array $headers): static
 	{
 		$new = clone $this;
+
 		foreach ($headers as $key => $value) {
 			$new = $new->withHeader($key, $value);
 		}
