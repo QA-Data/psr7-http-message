@@ -9,7 +9,8 @@
 	},
 	"require-dev": {
 		"nette/tester": "^2.5",
-		"orisai/coding-standard": "^3.10"
+		"orisai/coding-standard": "^3.10",
+		"phpstan/phpstan": "^1.12"
 	},
 	"autoload": {
 		"psr-4": {

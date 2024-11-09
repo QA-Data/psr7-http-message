@@ -94,7 +94,7 @@ final class Psr7ResponseTest extends TestCase
 		$clone = Psr7Response::of($this->response);
 
 		Assert::equal(205, $clone->getStatusCode());
-		Assert::equal('FOOBAR', $clone->getContents());
+		Assert::equal('FOOBAR', $clone->getContents()); // @phpstan-ignore-line
 	}
 
 	protected function setUp(): void

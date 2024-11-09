@@ -41,14 +41,14 @@ trait ExtraResponseTrait
 	public function writeJsonBody(array $data): static
 	{
 		return $this
-			->writeBody(json_encode($data))
+			->writeBody(json_encode($data, flags: JSON_THROW_ON_ERROR))
 			->withHeader('Content-Type', 'application/json');
 	}
 
 	public function writeJsonObject(JsonSerializable $object): static
 	{
 		return $this
-			->writeBody(json_encode($object))
+			->writeBody(json_encode($object, flags: JSON_THROW_ON_ERROR))
 			->withHeader('Content-Type', 'application/json');
 	}
 
