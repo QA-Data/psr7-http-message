@@ -4,6 +4,7 @@ namespace QaData\Psr7\Extra;
 
 use JsonException;
 use QaData\Psr7\Psr7Stream;
+use QaData\Psr7\Psr7Uri;
 use function json_decode;
 use const JSON_THROW_ON_ERROR;
 
@@ -43,6 +44,11 @@ trait ExtraRequestTrait
 		$this->getBody()->rewind();
 
 		return $contents;
+	}
+
+	public function withNewUri(string $uri): static
+	{
+		return $this->withUri(new Psr7Uri($uri));
 	}
 
 }
